@@ -23,15 +23,13 @@ jobs:
         distribution: 'zulu'
         java-version: '17'
 
-    - name: Setup Gradle 8.2 Cleanly
+    - name: Setup Stable Gradle 8.4
       uses: gradle/actions/setup-gradle@v4
       with:
-        gradle-version: '8.2'
+        gradle-version: '8.4'
         cache-disabled: true
 
     - name: Build Debug APK
-      env:
-        GRADLE_USER_HOME: /tmp/gradle
       run: |
         gradle assembleDebug -Dorg.gradle.project.cache.disable=true -Dorg.gradle.vfs.watch=false --no-daemon --no-configuration-cache
 
