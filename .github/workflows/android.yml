@@ -32,3 +32,9 @@ jobs:
     - name: Build Debug APK
       run: |
         gradle assembleDebug -Dorg.gradle.project.cache.disable=true -Dorg.gradle.vfs.watch=false --no-daemon --no-configuration-cache
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-debug-apk
+        path: android/app/build/outputs/apk/debug/app-debug.apk
