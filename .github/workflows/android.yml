@@ -23,11 +23,13 @@ jobs:
         distribution: 'zulu'
         java-version: '11'
 
-    - name: Setup Gradle 8.2
-      uses: gradle/actions/setup-gradle@v4
-      with:
-        gradle-version: '8.2'
-        cache-disabled: true
+    - name: Ultimate Build Command
+      run: |
+        sudo apt-get update && sudo apt-get install -y gradle
+        gradle assembleDebug -Dorg.gradle.project.cache.disable=true --no-daemon
 
-    - name: Build Debug APK
-      run: gradle assembleDebug --no-configuration-cache
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-debug-apk
+        path: android/app/build/outputs/apk/debug/app-debug.apk
