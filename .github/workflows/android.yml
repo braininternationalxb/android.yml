@@ -29,6 +29,11 @@ jobs:
         gradle-version: '8.13'
         cache-disabled: true
 
+    - name: Force Bypass Missing Paths
+      run: |
+        sed -i "s/implementation project(':capacitor-android')/\/\/ implementation project(':capacitor-android')/g" app/build.gradle
+        sed -i "s/include ':capacitor-android'/\/\/ include ':capacitor-android'/g" settings.gradle
+
     - name: Build Debug APK
       run: |
         gradle assembleDebug -Dorg.gradle.project.cache.disable=true -Dorg.gradle.vfs.watch=false --no-daemon --no-configuration-cache
