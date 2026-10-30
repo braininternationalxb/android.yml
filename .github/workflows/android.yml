@@ -30,6 +30,8 @@ jobs:
         cache-disabled: true
 
     - name: Build Debug APK
+      env:
+        GRADLE_USER_HOME: /tmp/gradle
       run: |
         gradle assembleDebug -Dorg.gradle.project.cache.disable=true -Dorg.gradle.vfs.watch=false --no-daemon --no-configuration-cache
 
