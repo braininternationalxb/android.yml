@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+android {
+    namespace "org.example.shesafe"
+    compileSdk 36
+    defaultConfig {
+        applicationId "org.example.shesafe"
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName "4.6.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug  // CI substitutes a real release key when secrets are present; see workflow
+        }
+    }
+    packagingOptions { resources { excludes += ['META-INF/*'] } }
+}
+repositories { google(); mavenCentral() }
+dependencies {
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "androidx.webkit:webkit:1.12.1"
+    implementation project(':capacitor-android')
+}
